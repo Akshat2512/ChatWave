@@ -3,6 +3,8 @@
 
 export default async function getResponse( route: string, jsn: object){
      try { 
+
+        // const response = await fetch(`https://key-grizzly-directly.ngrok-free.app/${route}`, { 
         const response = await fetch(`http://192.168.29.243:5000/${route}`, { 
         method: 'POST', headers: { 'Content-Type': 'application/json', }, 
         body: JSON.stringify(jsn), 

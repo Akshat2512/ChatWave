@@ -64,7 +64,8 @@ export const WebSocketProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     if(token != '')
    {     
        const ws: WebSocket = new WebSocket(`ws://192.168.29.243:5000/ws/${token}`);
-      
+      //  const ws: WebSocket = new WebSocket(`wss://key-grizzly-directly.ngrok-free.app/ws/${token}`);
+        
         ws.onopen = () => {
           console.log('WebSocket connected');
           // setConnection(true)

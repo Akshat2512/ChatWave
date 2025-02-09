@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "ai-genz-chatbot",
-    "slug": "ai-genz-chatbot",
+    "name": "Chat Wave",
+    "slug": "Chat-Wave",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/chatwave-icon.png", 
+    "icon": "./assets/images/chatwave-icon.png",
     "splash": {
       "image": "./assets/images/chatwave-icon.png",
       "backgroundColor": "#000000"
@@ -17,11 +17,11 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "foregroundImage": "./assets/images/chatwave-icon.png",
         "backgroundColor": "#ffffff"
       },
       "softwareKeyboardLayoutMode": "pan",
-      "package": "com.anonymous.aigenzchatbot"
+      "package": "com.anonymous.chatwave"
     },
     "web": {
       "bundler": "metro",
@@ -48,8 +48,9 @@
         "origin": false
       },
       "eas": {
-        "projectId": "ac870c5f-ac37-4d90-915d-2f22650b47ca"
+        "projectId": "60338fed-b15d-4be6-80a6-2ddb9cbfbfbf"
       }
-    }
+    },
+    "owner": "akshat2512"
   }
 }
