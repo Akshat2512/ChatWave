@@ -62,7 +62,8 @@ export const WebSocketProvider: React.FC<{ children: React.ReactNode }> = ({ chi
 
   useEffect(() => {
     if (token != '') {
-      const url = process.env.CHATWAVE_WEBSOCKET_URL;
+      const url = process.env.EXPO_PUBLIC_WEBSOCKET_URL;
+      console.log(url)
       const ws: WebSocket = new WebSocket(url + token);
 
       ws.onopen = () => {
