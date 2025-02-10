@@ -17,7 +17,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useDispatch, useSelector } from 'react-redux';
 import { StateMngProp } from '@/store/userReducer';
 
-import { setProfileImgAction } from '@/store/userAction';
+import { setName, setProfileImgAction } from '@/store/userAction';
 
 
 export type RootStackParamList = { "SearchUser": undefined, "FriendList": undefined, "Profile": undefined } 
@@ -49,8 +49,10 @@ export default function Chat() {
         indicatorVisible(false);
         // console.log(recvImage);
         
-        if(recvImage["uname"] == userName)
+         if(recvImage["uname"] == userName){
           dispatch(setProfileImgAction({uri:`data:image/png;base64,${recvImage["profile_pic"]}`})) 
+          dispatch(setName(recvImage["name"]))
+        }
           // console.log(recvImage.profile_pic);
           // setProfilePic(recvImage["profile_pic"]);
       }

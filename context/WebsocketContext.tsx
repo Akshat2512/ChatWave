@@ -7,15 +7,15 @@ import { AppState, AppStateStatus } from 'react-native';
 
 // Define the context type
 type WebSocketContextType = {
-    recvMessage: any;
-    setMessage:  (message: any) => void;
-    search_res: any;
-    sendMessage: (message: any) => void;
-    recvGifs: any;
-    recvImage: any;
-    recvNotify: any;
- };
- 
+  recvMessage: any;
+  setMessage: (message: any) => void;
+  search_res: any;
+  sendMessage: (message: any) => void;
+  recvGifs: any;
+  recvImage: any;
+  recvNotify: any;
+};
+
 export type RootStackParamList = { "Account": undefined, "Login": undefined } // Define the chat route
 
 const WebSocketContext = createContext<WebSocketContextType | null>(null);
@@ -29,12 +29,12 @@ export const WebSocketProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   const [recvGifs, setGifs] = useState({});
   const storage = useStorage();
   const [messageQueue, setMessageQueue] = useState<any[]>([]);
-  
+
   const { token, setToken } = useUser();
   // const maxRetries = 5;
-  
+
   const [connected, setConnection] = useState(true);
-  
+
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
   // const [appState, setAppState] = useState(AppState.currentState);
@@ -61,55 +61,54 @@ export const WebSocketProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   // }, [appState]);
 
   useEffect(() => {
-    if(token != '')
-   {     
-       const ws: WebSocket = new WebSocket(`ws://192.168.29.243:5000/ws/${token}`);
-      //  const ws: WebSocket = new WebSocket(`wss://key-grizzly-directly.ngrok-free.app/ws/${token}`);
-        
-        ws.onopen = () => {
-          console.log('WebSocket connected');
-          // setConnection(true)
-        };
+    if (token != '') {
+      const url = process.env.CHATWAVE_WEBSOCKET_URL;
+      const ws: WebSocket = new WebSocket(url + token);
 
-        ws.onmessage = (event) => {
-          const message = JSON.parse(event.data);
-          setMessageQueue((prevQueue) => [...prevQueue, message]);
-        };
-        
-        ws.onerror = (error) => {
+      ws.onopen = () => {
+        console.log('WebSocket connected');
+        // setConnection(true)
+      };
 
-          console.log("Connection Rejected")
-          // ws.close();
-          // setConnection(false);
-          // setMessage({"user":"not exist"})
-        };
+      ws.onmessage = (event) => {
+        const message = JSON.parse(event.data);
+        setMessageQueue((prevQueue) => [...prevQueue, message]);
+      };
 
-        ws.onclose = () => {
-          console.log('WebSocket disconnected');
-          // setConnection(false);
-          // loadCredentials();
+      ws.onerror = (error) => {
 
-        };
+        console.log("Connection Rejected")
+        // ws.close();
+        // setConnection(false);
+        // setMessage({"user":"not exist"})
+      };
 
-        setSocket(ws);
-   
-        return () => {
-          ws.close();
-          // setConnection(false);
-        };
-      }
+      ws.onclose = () => {
+        console.log('WebSocket disconnected');
+        // setConnection(false);
+        // loadCredentials();
+
+      };
+
+      setSocket(ws);
+
+      return () => {
+        ws.close();
+        // setConnection(false);
+      };
+    }
   }, [token]);
- 
+
   useEffect(() => {
     if (messageQueue.length > 0) {
       // console.log(messageQueue)
       const processMessage = async () => {
         const message = messageQueue[0];
-          // console.log(messageQueue)
-  
+        // console.log(messageQueue)
+
         if (message["search_users"] || message["search_friend"]) {
           setSearch(message);
-        } 
+        }
         else if (message["notification"]) {
           setNotification(message)
           setTimeout(() => {
@@ -120,10 +119,10 @@ export const WebSocketProvider: React.FC<{ children: React.ReactNode }> = ({ chi
           // console.log(message['uname']);
           setImage(message);
         }
-        else if(message["gifs"]){
+        else if (message["gifs"]) {
           setGifs(message);
         }
-         else {
+        else {
           setMessage(message);
         }
 
@@ -135,21 +134,21 @@ export const WebSocketProvider: React.FC<{ children: React.ReactNode }> = ({ chi
       return () => clearTimeout(timer);
     }
   }, [messageQueue]);
-  
-    // useEffect(() => {
-    //   // if(connected){
-    //   loadCredentials();
-    //   // }
-    // }, [])
 
-    // console.log(connected)
+  // useEffect(() => {
+  //   // if(connected){
+  //   loadCredentials();
+  //   // }
+  // }, [])
 
-async function sendMessage(message: any) {
+  // console.log(connected)
+
+  async function sendMessage(message: any) {
     // console.log(message);
     if (socket && socket.readyState === WebSocket.OPEN) {
       socket.send(message);
       return "sent";
-    } 
+    }
     else {
       console.log('WebSocket is not open');
       // const user = await storage.getItem("@username");
@@ -176,23 +175,22 @@ async function sendMessage(message: any) {
     }
   };
 
-const loadCredentials = async () => {
-  const user = await storage.getItem("@username");
-  const pwd = await storage.getItem("@password");
-  if(user && pwd){
+  const loadCredentials = async () => {
+    const user = await storage.getItem("@username");
+    const pwd = await storage.getItem("@password");
+    if (user && pwd) {
       // indicatorVisible(true)
-      const response = await getResponse("auth", {"user": user, "pwd": pwd});
+      const response = await getResponse("auth", { "user": user, "pwd": pwd });
       // indicatorVisible(false)
-      
-      if(response["status"] == 'success')
-      {  
-          setToken(response.token)
+
+      if (response["status"] == 'success') {
+        setToken(response.token)
       }
-      else{
+      else {
         navigation.navigate('Login');
       }
+    }
   }
-}
 
   return (
     <WebSocketContext.Provider value={{ recvMessage, recvImage, recvGifs, search_res, recvNotify, setMessage, sendMessage }}>

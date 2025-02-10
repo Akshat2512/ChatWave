@@ -16,51 +16,16 @@ export default function UserProfile() {
 
     const {search_res, sendMessage, recvNotify} = useWebSocket();  
 
-    const [name, setName] = useState('');
+    // const [name, setName] = useState('');
     const [search, loadingVisible]    = useState(false);
     const [result, resultVisible]     = useState(false);
     const [searchList, setSearchList] = useState([]);
     const [selectedImage, setSelectedImage] = useState<any | null>(null);
     
-    const { profileImg } = useSelector((state : StateMngProp) => state.userData);
+    const { profileImg, name } = useSelector((state : StateMngProp) => state.userData);
 
     const dispatch = useDispatch();
-    // const name = useSelector()
 
-    useEffect(()=>{
-        if(search_res["search_users"]){
-            if(search_res["search_users"] == "not_found"){
-                resultVisible(false);
-            }
-            else{
-                setSearchList(search_res["search_users"]);
-                resultVisible(true);
-                // console.log(searchList);
-            }
-            loadingVisible(false) 
-            console.log(search_res);
-        }
-    }, [search_res]);
-
-     useEffect(()=>{
-      if(recvNotify["notification"]){
-       if(recvNotify["notification"] == "Update Friend Tab"){
-        
-         sendMessage(`{"get":"search_users",  "input":"${name}"}`);
-      }
-     }
-     }, [recvNotify]);
-
-    function handleText(input: string): void {
-        setName(input);
-        if(input.length != 0)
-        {
-            sendMessage(`{"get":"search_users", "input":"${input}"}`);
-            loadingVisible(true);
-        }
-        setSearchList([]);
-
-    }
     
     const styles = StyleSheet.create({   
      profileContainer: {
@@ -69,13 +34,20 @@ export default function UserProfile() {
         // height: "auto",
         alignItems: "center",
       },
+
+      userInfo: {
+        // borderWidth:1,
+        // maxWidth:"100",
+        // height: "auto",
+        alignItems: "center",
+      },
      profileImage: {
         // flex:1,
-        width: 100,
-        height: 100,
-        borderRadius: 50,
+        width: 200,
+        height: 200,
+        borderRadius: 100,
       },
-        container: {
+      container: {
             flex: 1,
             // overflow: 'scroll',
             height: '100%',
@@ -103,10 +75,8 @@ export default function UserProfile() {
        
             paddingVertical:20,
           },
-      friendList:{
-            flex:1,
-            
-        },
+ 
+
         notfound:{
             borderWidth:1,
             flex:1,
@@ -154,16 +124,19 @@ export default function UserProfile() {
         <View style={[styles.container, themeContainerStyle]}>
             {/* <TextInput style={[styles.inputText, themeTextStyle]} value={name} onChangeText={ handleText } placeholder=" Name ... " placeholderTextColor={'gray'} /> */}
             { search && <ActivityIndicator size="small" color={colorMode === 'dark' ? 'white' : 'black'} /> }
-            <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+            {<KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
                     <View style={styles.profileContainer}>
                         {/* {selectedImage ? (<Image source={{ uri: selectedImage }} style={styles.profileImage} />): */}
                         <Image source={profileImg} style={styles.profileImage} />
                         <Ionicons name="create-outline" size={20} color={colorMode === 'dark' ? "white" : "black"} style={ styles.editIcon } onPress = {(event)=>{ event.preventDefault(); updateProfilePicture();}}/>
                     </View>
+                    <View style={styles.userInfo}>
+                        <Text style={[{margin: 30, fontSize:20},themeTextStyle]}>Name:   {name} </Text> 
+                    </View>
                     
-            </KeyboardAvoidingView>
+            </KeyboardAvoidingView>}
 
-
+           
             {/* <KeyboardAvoidingView
                        style={styles.inputContainer}
                        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
