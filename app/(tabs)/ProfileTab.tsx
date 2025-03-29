@@ -53,6 +53,7 @@ export default function UserProfile() {
                        }
 
      sendMessage(JSON.stringify(payload));
+     
      indicatorVisible(false);
       // profileImg.uri = imageInfo.uri;
       isEditImage(false); // Close ChangeImage component after selecting image 
