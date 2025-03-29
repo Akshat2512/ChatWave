@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState, useCallback, useMemo } from 'react';
-import { View, Text, TextInput, StyleSheet, FlatList, ImageSourcePropType, useWindowDimensions, KeyboardAvoidingView, Platform, Button, Keyboard, Modal, NativeSyntheticEvent, NativeScrollEvent, ActivityIndicator, TouchableOpacity, Animated, ScrollView } from 'react-native';
+import { View, Text, TextInput, StyleSheet, FlatList, ImageSourcePropType, useWindowDimensions, KeyboardAvoidingView, Platform, Button, Keyboard, NativeSyntheticEvent, NativeScrollEvent, ActivityIndicator, TouchableOpacity, Animated, ScrollView } from 'react-native';
 import { useTheme } from '@/context/ThemeContext';
 import { Colors } from '@/constants/Colors';
 import { Ionicons } from '@expo/vector-icons';
@@ -619,6 +619,7 @@ const handleText = (text: string)=>{
         { botState == "awake" && <AutoCompletion select = {handleText} inputRef={inputRef} textInput={textInput}/> } 
         </View>
      
+
 
         { textStyles && (<View><FlatList
           data={fontBgColor}

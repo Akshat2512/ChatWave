@@ -49,6 +49,7 @@ export default function Layout() {
 
   const { colorMode, themeTextStyle } = useTheme();
 
+  
   const styles={
       headerStyle: {
         backgroundColor: colorMode === 'light' ? '#000' : '#fff',
@@ -60,7 +61,7 @@ export default function Layout() {
     
     // {/* {!isReady && <LoadingIndicator opacity={fadeAnim} />}
     //   {isReady && ( */}
-         <NavigationThemeProvider value={colorMode === 'dark' ? DarkTheme : DefaultTheme}>
+        //  <NavigationThemeProvider value={colorMode === 'dark' ? DarkTheme : DefaultTheme}>
             <Drawer.Navigator>
               <Drawer.Screen
                 name="Chat" // This is the name of the page and must match the URL from root
@@ -81,7 +82,7 @@ export default function Layout() {
               />
               
             </Drawer.Navigator>
-         </NavigationThemeProvider>
+        //  </NavigationThemeProvider>
           
   );
 }

@@ -32,6 +32,8 @@ import TitleHeader from '@/components/Header/TitleHeader';
 import LoadingIndicator from '@/components/favicon';
 import { useFonts } from 'expo-font';
 
+import changeNavigationBarColor from 'react-native-navigation-bar-color';
+
 // import changeNavigationBarColor from 'react-native-navigation-bar-color'
 // import { Immersive } from 'react-native-immersive';
 
@@ -92,12 +94,17 @@ function RootLayoutNav() {
   // const [loaded] = useFonts({
   //   SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
   // });
-
+  
   useEffect(() => {
     if (loaded) {
       SplashScreen.hideAsync();
     }
   }, [loaded]);
+
+  useEffect(() => {
+    changeNavigationBarColor(colorMode === 'dark' ? 'black' : 'lightgray', true);
+  }, [colorMode])
+
 
   if (!loaded) {
     return null;
@@ -107,7 +114,7 @@ function RootLayoutNav() {
     
     // <NavigationContainer theme={colorMode === 'dark' ? DarkTheme : DefaultTheme}>
 
-    <NavigationThemeProvider value={colorMode === 'dark' ? DarkTheme : DefaultTheme}>  
+    <NavigationThemeProvider value={colorMode === 'dark' ? DarkTheme : DefaultTheme} >  
       <View style={{ flex: 1, backgroundColor: colorMode === 'dark' ? "black" : "transparent" }}>
       <Stack.Navigator initialRouteName = { isSignedIn ? "Account" : "Login" } >
         <Stack.Screen name="Login" component={Login} options={{ headerShown: false, }} />
@@ -135,6 +142,7 @@ function RootLayoutNav() {
 
         <Stack.Screen name="Not-found" component={NotFoundScreen} options={{ title: 'Oops!' }} />
       </Stack.Navigator>
+      
       <StatusBar style={colorMode === 'dark' ? 'light' : 'dark'} />
       </View> 
   

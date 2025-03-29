@@ -14,6 +14,7 @@ import ChatView from '@/components/Chat/ChatScreen';
 import ChatHeader from '@/components/Header/ChatHeader';
 import { useTheme } from '@/context/ThemeContext';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import changeNavigationBarColor from 'react-native-navigation-bar-color';
 
 
 interface Chat {
@@ -33,7 +34,7 @@ export default function UserChat() {
 
   // const [selectedImage, setSelectedImage] = useState<ImageSourcePropType | null>(null);
   // const [selectedChat, setSelectedChat] = useState<Chat | null>(null);
-  const {themeTextStyle} = useTheme();
+  const {colorMode, themeTextStyle} = useTheme();
   const { socket } = useWebSocket();
 
 
@@ -71,9 +72,10 @@ export default function UserChat() {
   
   const [isVisible, setVisible] = useState(0);
 
+
   return (
 
-    <Modal animationType='fade' style={{flex:1 }} visible={true} transparent={true} onRequestClose={() => {if(navigation.canGoBack()) navigation.goBack()}}> 
+    <Modal hardwareAccelerated={true} transparent={true} animationType='fade' style={{flex:1 }} visible={true} onRequestClose={() => {if(navigation.canGoBack()) navigation.goBack()}}> 
       <GestureHandlerRootView style={{flex:1}}>
         <View style={[styles.chatContent, {transform:[{scaleX: scalefactor},],  opacity: isVisible}]}>  
             { chatSelect.uname != "" && 
@@ -91,7 +93,7 @@ export default function UserChat() {
             }          
         </View>
      </GestureHandlerRootView>
-   </Modal>
+     </Modal>
    
   )
 }
