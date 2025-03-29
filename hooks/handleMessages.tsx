@@ -10,12 +10,11 @@ export function HandleMessage(message: any, userName: string | null, online: str
 
 
   if (message['Type'] == "profileDetails") {
-
-    console.log(message)
     if (message.uname == userName) {
 
       if("created_on" in message)
         {
+          // console.log("created_on: ", message)
           const date = new Date(message.created_on+'Z').toDateString();
           const time = new Date(message.created_on+'Z').toLocaleTimeString();
           dispatch(setProfileDetails(message["name"], date + ", " + time))
@@ -48,8 +47,8 @@ export function HandleMessage(message: any, userName: string | null, online: str
     if (message["uname"] == userName) {
       dispatch(setProfileImgAction(`${message["profile_pic"]}`, message["updated_on"]))
       if("created_on" in message){
-      const date = new Date(message.created_on).toDateString();
-      const time = new Date(message.created_on).toLocaleTimeString();
+      const date = new Date(message.created_on + 'Z').toDateString();
+      const time = new Date(message.created_on + 'Z').toLocaleTimeString();
       dispatch(setProfileDetails(message["name"], date + ", " + time))
       }
     }
@@ -121,7 +120,7 @@ export function HandleMessage(message: any, userName: string | null, online: str
 
   if (message["Type"] == 'search_users') {
 
-    console.log("Dispatch: ", message['info']);
+    // console.log("Dispatch: ", message['info']);
     if(message["info"] == "not_found"){
       dispatch(setSearchList([]))
     }
@@ -236,7 +235,7 @@ export function HandleMessage(message: any, userName: string | null, online: str
   }
 
   if(message["Type"] == "update_messages"){
-      console.warn(message["chats"])
+      console.warn("Messages updated")
       dispatch(setChatUpdate(message["chats"]));
       dispatch(setUpdateState("ready"));
 
@@ -266,7 +265,7 @@ export function HandleMessage(message: any, userName: string | null, online: str
   }
 
   if(message["Type"] == "ai_generated"){
-    console.log('"'+message["stream"]+'"')
+    // console.log('"'+message["stream"]+'"')
     dispatch(setAICompletion(message["stream"]))
   }
 

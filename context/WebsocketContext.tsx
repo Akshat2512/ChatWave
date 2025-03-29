@@ -34,7 +34,7 @@ export const WebSocketProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   const connecting = useRef<boolean>(false);
   const connected = useRef<boolean>(false);
 
-  const { isSignedIn, userName, passWord, friends } = useSelector((state: StateMngProp) => state.userData);
+  const { isSignedIn, userName, passWord } = useSelector((state: StateMngProp) => state.userData);
 
   const { token, setToken } = useUser();
 
@@ -43,27 +43,27 @@ export const WebSocketProvider: React.FC<{ children: React.ReactNode }> = ({ chi
 
   const dispatch = useDispatch()
  
-  function UpdateTabs(ret: "Update Friend Tab" | {
+  function UpdateTabs(action: "Update Friend Tab" | {
     update: string;
     users: string[];
 } | {
     update: string;
     users: friendsProp[];
 } | undefined ){
-    if(ret == 'Update Friend Tab'){
+    if(action == 'Update Friend Tab'){
       sendMessage('{"get":"search_friends"}')
       return
     }
 
-    if (typeof ret === 'object' && 'update' in ret && ret.update == "Update last_seen") {
-      ret.users.forEach(e => sendMessage(`{"update": "last_seen", "uname": "${e}"}`))
+    if (typeof action === 'object' && 'update' in action && action.update == "Update last_seen") {
+      action.users.forEach(e => sendMessage(`{"update": "last_seen", "uname": "${e}"}`))
       return
     }
 
-    if(typeof ret === 'object' && 'update' in ret && ret.update == "Update Messages"){
+    if(typeof action === 'object' && 'update' in action && action.update == "Update Messages"){
       const chats = store.getState().chatData.chats;
       const list: any = [];
-      ret.users.forEach((e: any) => {
+      action.users.forEach((e: any) => {
         if(chats[e["uname"]]?.updated_on){
           list.push({friend: e["uname"], "updated_on": chats[e["uname"]].updated_on})
         }
@@ -105,9 +105,9 @@ export const WebSocketProvider: React.FC<{ children: React.ReactNode }> = ({ chi
             const search = store.getState().ContactUpdates.searchUser;
             const online = store.getState().ContactUpdates.onlineUsers;   
           
-            const ret = HandleMessage(message, userName, online, currentFriends, search, dispatch)
+            const action = HandleMessage(message, userName, online, currentFriends, search, dispatch)
                 
-            UpdateTabs(ret)
+            UpdateTabs(action)
 
          
           // setMessageQueue((prevQueue) => [...prevQueue, message]);
@@ -121,21 +121,21 @@ export const WebSocketProvider: React.FC<{ children: React.ReactNode }> = ({ chi
 
         socket.onerror = (error) => {
           console.log('WebSocket error observed:', error);
-          Alert.alert("Server Error", "WebSocket Failed to connect ...", 
-            [
-                  {
-                    text: 'Go to Login Page',
-                    onPress: () => {
-                      dispatch(logoutAction());
-                      navigation.dispatch(StackActions.replace('Login'));
-                    },
-                  },
-                  { 
-                    text: 'Close', 
-                    onPress: () => {}
-                  },
+          // Alert.alert("Server Error", "WebSocket Failed to connect ...", 
+          //   [
+          //         {
+          //           text: 'Go to Login Page',
+          //           onPress: () => {
+          //             dispatch(logoutAction());
+          //             navigation.dispatch(StackActions.replace('Login'));
+          //           },
+          //         },
+          //         { 
+          //           text: 'Close', 
+          //           onPress: () => {}
+          //         },
 
-            ]);
+          //   ]);
           connecting.current = false;
           reject(socket)
         }
@@ -216,7 +216,7 @@ export const WebSocketProvider: React.FC<{ children: React.ReactNode }> = ({ chi
 
   const loadCredentialsAndLogin = async () => {
     try {
-      console.log(userName, passWord)
+      // console.log(userName, passWord)
       if (userName && passWord) {
         // indicatorVisible(true)
         const response = await getResponse("auth", { "user": userName, "pwd": passWord });

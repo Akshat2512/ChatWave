@@ -22,7 +22,7 @@ export const logoutAction = () => {
 }
 
 export const setProfileImgAction = (profileImage: string | null, updated_on: string) => {
-    console.log("type of profileImage: ", typeof(profileImage), profileImage)  
+    // console.log("type of profileImage: ", typeof(profileImage), profileImage)  
     if (profileImage != "null" && profileImage != null) 
     return {
         type : USER_PROFILE_IMG,
