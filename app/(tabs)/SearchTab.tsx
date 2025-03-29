@@ -1,56 +1,47 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { View, Text, ActivityIndicator, TextInput, StyleSheet, KeyboardAvoidingView, Platform } from 'react-native';
 import { useTheme } from "@/context/ThemeContext";
 import { Colors } from '@/constants/Colors';
-import ChatList from '@/components/ChatList';
 import SearchList from '@/components/SearchList';
 import { useWebSocket } from '@/context/WebsocketContext';
+import { useDispatch } from 'react-redux';
+import { setSearchList } from '@/store/userAction';
 
 
 export default function SearchUserBase() {
     const { colorMode, themeTextStyle, themeContainerStyle } = useTheme();
 
-    const {search_res, sendMessage, recvNotify} = useWebSocket();  
+    const { sendMessage } = useWebSocket();  
 
     const [name, setName] = useState('');
-    const [search, loadingVisible]    = useState(false);
-    const [result, resultVisible]     = useState(false);
-    const [searchList, setSearchList] = useState([]);
+    const [loading, loadingVisible]    = useState(false);
+    const dispatch = useDispatch();
 
-    useEffect(()=>{
-        if(search_res["search_users"]){
-            if(search_res["search_users"] == "not_found"){
-                resultVisible(false);
-            }
-            else{
-                setSearchList(search_res["search_users"]);
-                resultVisible(true);
-                // console.log(searchList);
-            }
-            loadingVisible(false) 
-            console.log(search_res);
-        }
-    }, [search_res]);
-
-     useEffect(()=>{
-      if(recvNotify["notification"]){
-       if(recvNotify["notification"] == "Update Friend Tab"){
-        
-         sendMessage(`{"get":"search_users",  "input":"${name}"}`);
-      }
-     }
-     }, [recvNotify]);
+   
+const interval = useRef<NodeJS.Timeout>();
 
     function handleText(input: string): void {
-        setName(input);
+
+        clearInterval(interval.current);
+         setName(input);
+         dispatch(setSearchList([]));
+        interval.current = setTimeout(()=> {
+              
         if(input.length != 0)
         {
             sendMessage(`{"get":"search_users", "input":"${input}"}`);
-            loadingVisible(true);
         }
-        setSearchList([]);
+        else{
+            dispatch(setSearchList([]));
+        }
+        loadingVisible(true);
+        }, 1000)
+     
 
     }
+
+
+
     
     const styles = StyleSheet.create({
         container: {
@@ -94,16 +85,17 @@ export default function SearchUserBase() {
         
         
     });
-
+    
     return(
         <View style={[styles.container, themeContainerStyle]}>
             <TextInput style={[styles.inputText, themeTextStyle]} value={name} onChangeText={ handleText } placeholder=" Name ... " placeholderTextColor={'gray'} />
-            { search && <ActivityIndicator size="small" color={colorMode === 'dark' ? 'white' : 'black'} /> }
+            {  name.length!=0 && loading && <ActivityIndicator size="small" color={colorMode === 'dark' ? 'white' : 'black'} /> }
 
                <KeyboardAvoidingView
                        style={styles.inputContainer}
                        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-            { name.length!=0 && (result ? <View style={styles.friendList}><SearchList result = { searchList } setSearchList = { setSearchList } /></View> : <View style={{flex:1}}><Text style={[{textAlign:"center", color:"rgb(54, 54, 54)"}]}>Users not found</Text></View>) }
+             { name.length!=0 && <SearchList  loadingVisible = {loadingVisible} input = {name}/>}
+            {/* { name.length!=0 && (result ? <View style={styles.friendList}><SearchList result = { searchList } setSearchList = { setSearchList } /></View> : <View style={{flex:1}}><Text style={[{textAlign:"center", color:"rgb(54, 54, 54)"}]}>Users not found</Text></View>) } */}
             </KeyboardAvoidingView>
         </View>
     )

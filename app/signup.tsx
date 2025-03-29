@@ -10,6 +10,7 @@ import { Ionicons } from "@expo/vector-icons";
 import  ChangeImage  from "@/components/imagePicker";
 import { base64ToUint8Array } from "@/hooks/imgbase64ToBytes";
 import LoadingIndicator from "@/components/ActivityIndicator";
+import { useDispatch } from "react-redux";
 
 export type RootStackParamList = { "Login": undefined, "ProfileImage": undefined } // Define the chat route
 
@@ -23,13 +24,15 @@ export default function Signup(){
     const [checkUser, setCheckUser] = useState('gray');
     const [checkPwd, setCheckPassword] = useState('gray');
     const [ username, setUsername ] = useState('');
-    const {setUName} = useUser();
-    const { recvMessage, setMessage, sendMessage } = useWebSocket();
+  
+    // const { recvMessage, setMessage, sendMessage } = useWebSocket();
     const [loading, indicatorVisible] = useState(false);
     
     const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
     const { colorMode, themeTextStyle, themeContainerStyle } = useTheme();
+
+
 
       useEffect(() => {
          
@@ -167,9 +170,10 @@ export default function Signup(){
         const currentDate = new Date().toLocaleDateString();
         const currentTime = new Date().toTimeString().split(" ")[0];
         const currentDateTime = currentDate + "T" + currentTime;
-
+        
 
          var data: any = {"name":name,"user":username, "pwd": password, "created_on": currentDateTime};
+
          var usr = await getResponse("user",  { "User": username});
         //  console.log(usr)
          if( usr.user == "exist" )
@@ -282,13 +286,15 @@ const styles = StyleSheet.create({
     },
 
     inputText: { 
-        maxHeight: 40, 
+        // maxHeight: 40,
+        height: 30, 
         borderColor: 'gray',
         width:100,
         borderRadius:10, 
         marginRight:10,
         borderWidth: 1, 
         paddingLeft: 10,
+        // paddingHorizontal:10,
         flexGrow:1,
       },
 

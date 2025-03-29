@@ -8,28 +8,39 @@ import { useTheme } from '@/context/ThemeContext';
 import { Collapsible } from '@/components/Collapsible';
 import useStorage from '@/hooks/useStorage';
 import { NavigationProp, StackActions, useNavigation } from '@react-navigation/native';
+import { useDispatch } from 'react-redux';
+import { logoutAction } from '@/store/userAction';
+import { useWebSocket } from '@/context/WebsocketContext';
 // import { RootStackParamList } from './chat';
 
 export type RootStackParamList = { "Account": undefined, "Login": undefined }
 export default function Settings() {
   const { colorMode, toggleColorMode, themeTextStyle, themeContainerStyle } = useTheme();
-  const storage = useStorage();
-
+  const dispatch = useDispatch();
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+  const {socket, connected} = useWebSocket();
   
-  const handleLogout = async ()=>{
-      await storage.removeItem("@username");
-      await storage.removeItem("@password");
-      navigation.dispatch(StackActions.replace('Login'));
+  const handleLogout = async () => {
+      setTimeout(()=> {
+        socket.current?.close();
+        dispatch(logoutAction());
+      }, 1000);
+      connected.current = false;
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'Login' }],
+       })
+           
   }
+  
   return (
     <><View style={[themeContainerStyle, {padding:10}]}>
-    <Collapsible title="Theme Settings">
+    {/* <Collapsible title="Theme Settings"> */}
       <ThemedView style={[themeContainerStyle, styles.container]}>
         <ThemeToggle onToggle={toggleColorMode} currentMode={colorMode} />
         <ThemedText style={themeTextStyle}>Press the icon to toggle theme</ThemedText>
       </ThemedView>
-    </Collapsible>
+    {/* </Collapsible> */}
     </View>
     <View style={[styles.logoutContainer, themeContainerStyle]}>
        <TouchableOpacity style={themeContainerStyle} 
@@ -54,6 +65,7 @@ const styles = StyleSheet.create({
     flex:1,
     alignItems: 'center',
     justifyContent:'flex-end',
+    // zIndex: 1,
     // alignSelf:"flex-end"
   },
   logoutTextStyle:{

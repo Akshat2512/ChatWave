@@ -4,34 +4,18 @@ import { Image as AniImage } from "expo-image";
 import React, { useEffect, useRef, useState } from 'react';
 import { StyleSheet, Image as StaticImage, View, Text} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { ChatListProp, fontProp } from '@/interfaces/ChatInterface';
 
-interface gifProps{
-  translateX: number ;
-  translateY: number ;
-  rotate: string;
-  scale: number;
-  flip: boolean;
-}
-
-interface fontProp{
-  text: string;
-  bgColor: string;
-  fontFamily: string;
-  color: string;
-  size: number;
-}
 
 type Props = {
   id: number;
   imageSize : number;
   uri       : string | null;
   font      : fontProp | null;
-  setgif    : React.Dispatch<React.SetStateAction<[] | {id: number, uri: string | null; font: fontProp | null, transform:gifProps}[]>>;
-  scrollY   : number;
-  kheight   : number;
+  setgif    : React.Dispatch<React.SetStateAction<[] | ChatListProp[]>>;
 };
 
-export default function DraggableImage({ id, imageSize, uri, font, setgif, scrollY, kheight }: Props) {
+export default function DraggableImage({ id, imageSize, uri, font, setgif }: Props) {
 
   const [isPlaying, setIsPlaying] = useState(true);
   const scaleImage = useSharedValue(imageSize);
@@ -42,22 +26,30 @@ export default function DraggableImage({ id, imageSize, uri, font, setgif, scrol
   const baseScale = useSharedValue(1);
   const [isFlipped, setIsFlipped] = useState<Boolean>(false);
 
+
+  useEffect(() => {
+    // Initialize shared values after the component mounts
+    scaleImage.value = imageSize;
+    translateX.value = 0;
+    translateY.value = 0;
+    rotation.value = 0;
+    pinchScale.value = 1;
+    baseScale.value = 1;
+  }, [imageSize]);
+
   const imageStyle = useAnimatedStyle(() => {
     return {
-      width: withSpring(scaleImage.value * pinchScale.value, {
-        damping: 10, // Lower value for more bounciness
-        stiffness: 300, // Higher value for more stiffness
-      }),
-      height: withSpring(scaleImage.value * pinchScale.value, {
-        damping: 10, // Lower value for more bounciness
-        stiffness: 300, // Higher value for more stiffness
-      }),
+      width: scaleImage.value * pinchScale.value, 
+      height: scaleImage.value * pinchScale.value, 
     };
   });
   
  const textStyle = useAnimatedStyle(() => {
   return {
-    transform: [{ scale: (scaleImage.value * pinchScale.value) / 200 }],
+    transform: [{ scale: withSpring((scaleImage.value * pinchScale.value)/200, {
+      damping: 10, // Lower value for more bounciness
+      stiffness: 300, // Higher value for more stiffness
+    }), }],
     // maxWidth: withSpring((scaleImage.value * pinchScale.value)/80, {
     //   damping: 10, // Lower value for more bounciness
     //   stiffness: 300, // Higher value for more stiffness
@@ -106,14 +98,9 @@ export default function DraggableImage({ id, imageSize, uri, font, setgif, scrol
         ],
       };
     }
-
-
-  useEffect(()=>{
-    runOnJS(getTransformData)();
-    }, [scrollY])
   
 
-  const intervalRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const intervalRef = useRef<ReturnType<typeof setTimeout> | null >(null);
   
   function getTransformData(){
       if (intervalRef.current) {
@@ -124,7 +111,7 @@ export default function DraggableImage({ id, imageSize, uri, font, setgif, scrol
           {
           var data = [... prev];
           if(prev.length !== 0){
-           data[id].transform = {"translateX": translateX.value, "translateY": scrollY + translateY.value, "rotate": `${rotation.value}rad`, "scale": scaleImage.value * pinchScale.value, "flip": isFlipped };
+           data[id].transform = {"translateX": translateX.value, "translateY": translateY.value, "rotate": `${rotation.value}rad`, "scale": scaleImage.value * pinchScale.value, "flip": isFlipped };
           }
           return data;
           }
@@ -174,13 +161,15 @@ export default function DraggableImage({ id, imageSize, uri, font, setgif, scrol
     <GestureDetector gesture={Gesture.Simultaneous(drag, rotate, pinch)}>
     
       <Animated.View style={[containerStyle,  { top: 20, left: 20 }]}>
-          <Animated.View style={[styles.imageContainer, imageStyle, { borderWidth: 3, 
+          <Animated.View style={[styles.imageContainer, imageStyle , { borderWidth: 3, height: 200, width: 200,
                                  borderColor:"rgb(10, 235, 255)"}]}>
            
     
             {font && <View style={{
                   // borderWidth: 3, 
                   padding: 12,
+                  width:200,
+
                   // borderColor:"rgb(10, 235, 255)",
                   // position: 'absolute',
                   justifyContent: 'center',
@@ -191,16 +180,17 @@ export default function DraggableImage({ id, imageSize, uri, font, setgif, scrol
                            //  justifyContent: 'center',
                            //  alignItems: 'center',
                           //  textAlign: 'center',
-                           
                            color: font.color, 
                            backgroundColor:font.bgColor, 
                            fontFamily: font.fontFamily, 
                            fontSize: font.size,
-                           padding: 5, 
+                           padding: 10, 
                            borderRadius: 10,
                            boxShadow: font.bgColor == 'transparent' ? '' : '0 2px 4px rgba(0, 0, 0, 0.46)', 
-                        }, textStyle]}>{font.text}</Animated.Text></View> }
-            {uri && <><AniImage source={{ uri: uri }} style={[styles.image, { transform: [{ scaleX: isFlipped ? -1 : 1 }] }]} contentFit="contain" key={id} />
+                        }, textStyle]}
+                        allowFontScaling={false}>{font.text}</Animated.Text></View> }
+
+            {uri && <><AniImage source={{ uri: uri }} placeholder={require('@/assets/images/ball_icon-ezgif.com-resize.gif')} style={[styles.image, { transform: [{ scaleX: isFlipped ? -1 : 1 }] }]} contentFit="contain" key={id} />
           <GestureDetector gesture={flipItem}>
             <View style={{ position: 'absolute', top: -25, left: -25, zIndex: 1 }}>
               <Ionicons name="sync-circle" size={30} color="rgb(10, 235, 255)" />

@@ -5,7 +5,7 @@ const LoadingIndicator = ({ opacity }: { opacity: Animated.Value }) => {
   return (
     <Animated.View style={[styles.container, { opacity }]}>
       {/* <Text>Loading...</Text> */}
-      <Image source={require('@/assets/images/chatwave-icon.png')} style={{ alignSelf: 'center' }} />
+      <Image source={require('@/assets/images/splash.png')} style={{ alignSelf: 'center' }} resizeMode='contain' />
     </Animated.View>
   );
 };

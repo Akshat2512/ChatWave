@@ -4,55 +4,38 @@ import { useTheme } from '@/context/ThemeContext';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from 'react-native';
 import ImageZoomModal from './ImageZoomModal';
-// import ChatHistory from './ChatHistory';
 
 import { useUser } from '@/context/UserContext';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { useWebSocket } from '@/context/WebsocketContext';
 import { Ionicons } from '@expo/vector-icons';
+import { useSelector } from 'react-redux';
+import { friendsProp, StateMngProp } from '@/store/userReducer';
 
-interface ListType{
-    profile_pic: string; 
-    uname: string; 
-    // message: string; 
-    // timestamp: string; 
-    // profileImage: ImageSourcePropType;
-}
 
 export type RootStackParamList = {  "Account": undefined; "UserChat": undefined } // Define the chat route
 
-export default function FriendList({ result, setFriendList }: { result: any, setFriendList: React.Dispatch<React.SetStateAction<never[]>> }) {
-  
+export default function FriendList() {
+  console.log("FriendList Rerendered");
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   
   const [ isModalVisible, setIsModalVisible ] = useState(false);
   const [ selectedImage, setSelectedImage ] = useState<ImageSourcePropType | null>(null);
   const { sendMessage, recvMessage } = useWebSocket();
   const [search, loadingVisible] = useState(false);
-  const {recvImage} = useWebSocket();
   const [usr_img, setUsrImage] = useState<{ [key: string]: string }>({});
+
+ var {userName, passWord, friends} = useSelector((state: StateMngProp) => state.userData);
+  const [result, setFriendList] = useState<friendsProp[]>([]);
 
 
   useEffect(()=>{
-  
-    if(recvImage){
-          if(recvImage["profile_pic"] && recvImage["uname"]){
-          console.log(recvImage['uname']);
-          const img: any = usr_img;
-          img[recvImage["uname"]] = recvImage["profile_pic"];
-          setUsrImage(img);
-          // console.log(Object.keys(usr_img))
-          // console.log(recvImage['uname'])
-          // usr_img[images["uname"]] = images["uname"];
+    if(friends){
+      setFriendList(friends);  
+    }
+  }, [friends]);
 
-          // console.log(usr_img) 
-            // console.log(images);
-          }
-        }
-
-
-      }, [recvImage]);
-
+    
   useEffect(()=>{
     if(recvMessage){
       if(recvMessage["friend_req"] == "sent"){
@@ -69,12 +52,12 @@ export default function FriendList({ result, setFriendList }: { result: any, set
   const handleModalClose = () => {
     setIsModalVisible(false);
     setSelectedImage(null);
-  };
+  }
   
 
   const { colorMode, themeTextStyle, themeContainerStyle  } = useTheme();
   
-  function sendFriendRequest(uname:string) {
+    function sendFriendRequest(uname:string) {
         const updatedFriends = result.map((element:  any) => 
            element.uname === uname && element.status === "none" ? { ...element, status: "pending" } : element);
         if(updatedFriends)
@@ -88,6 +71,8 @@ export default function FriendList({ result, setFriendList }: { result: any, set
         if(updatedFriends)
            setFriendList(updatedFriends);
 
+        // friends = friends.filter(e => e.uname != uname)
+        console.log(friends.length);
         sendMessage(`{"send":"del_friend_req", "from":"${uname}"}`);
       
     }
@@ -101,40 +86,29 @@ export default function FriendList({ result, setFriendList }: { result: any, set
         sendMessage(`{"send":"acc_friend_req", "of":"${uname}"}`);
     }
 
-   function handleprofileImages(uname: string) {
-    // console.log("req_image :", uname)
-    // console.log(Object.keys(usr_img))
-    sendMessage(`{"get":"profile_pic", "uname":"${uname}"}`);
-  }
+  //  function handleprofileImages(uname: string) {
+  //   // console.log("req_image :", uname)
+  //   // console.log(Object.keys(usr_img))
+  //   sendMessage(`{"get":"profile_pic", "uname":"${uname}"}`);
+  // }
 
   return (
     <>
-    
-    
-    
-    <FlatList
+    { result.length > 0 ? <FlatList
       data={result}
       keyExtractor={(_, index) => index.toString()}
       renderItem={({ item }) => (
-        // <Link 
-        // style={styles.box} 
-        // href={`/users/${item.name}`} 
-        // // onPress={()=>{setUsername(item.name)}}
-        // >
-        <TouchableOpacity onPress={()=> {
-          navigation.navigate("UserChat")
-        }}>
+
           <View style={[styles.ListItem, themeContainerStyle]}>
             <TouchableOpacity onPress={(event) => {
               event.preventDefault();
-              handleImagePress(usr_img[item.uname] ? {uri:`data:image/png;base64,${usr_img[item.uname]}`} : require('@/assets/profiles/images/default.png'));}}>
-              <Image source={ usr_img[item.uname]
-                              ? {uri:`data:image/png;base64,${usr_img[item.uname]}`} 
-                              : require('@/assets/profiles/images/default.png')} 
+              handleImagePress(item.profileImage.uri ? item.profileImage : require("@/assets/profiles/images/default.png"));
+              }}>
+              <Image source={ item.profileImage.uri ? item.profileImage : require("@/assets/profiles/images/default.png") } 
                      style={styles.profileImage} 
-                     onLoad = {()=>{ usr_img[item.uname] 
-                                      ? console.log("found :", item.uname) 
-                                      : handleprofileImages(item.uname)}} 
+                    //  onLoad = {()=>{ usr_img[item.uname] 
+                    //                   ? console.log("found :", item.uname) 
+                    //                   : handleprofileImages(item.uname)}} 
               /> 
               {/* <View style={[styles.status, { backgroundColor: online.includes(item.uname) ? "rgb(55, 203, 47)" : "gray" }]}></View> */}
             </TouchableOpacity>
@@ -150,19 +124,19 @@ export default function FriendList({ result, setFriendList }: { result: any, set
               {item.status == "none" && (<Ionicons style={[themeTextStyle, styles.tab]} name="person-add-outline" size={20} />) }
               </TouchableOpacity> 
               {item.status == "pending" && (<View style={[styles.tab]}><Button title="Requested" color= "grey"
-                                onPress={()=>removeFriend(item.uname)} /></View>) }
+                                            onPress={()=>removeFriend(item.uname)} /></View>) }
 
-              {item.status == "requested" && (<View style={[styles.tab]}><Button title="Accept"
-                                onPress={()=>AddFriend(item.uname)} /></View>) }
+              {item.status == "requested" && (<View style={[styles.tab, {flexDirection:"row", gap: 10, padding: 10}]}>
+                                <Button title="Accept" onPress={()=>AddFriend(item.uname)} /> 
+                                <Button title="X" color = "red" onPress={()=>removeFriend(item.uname)} /></View>) }
               
               {item.status == "accepted" && (<View style={[styles.tab]}><Button title = "Unfriend"
-                           onPress={()=> removeFriend(item.uname)} /></View> ) }
+                                             onPress={()=> removeFriend(item.uname)} /></View> ) }
              
           </View>
-          </TouchableOpacity>
 
         // </Link> 
-      )} />
+      )} /> : <Text style={themeTextStyle}>Friends Not Found</Text>}
       <ImageZoomModal visible={isModalVisible} onClose={handleModalClose} imageSource={selectedImage || require('@/assets/profiles/images/default.png')} /></>
   );
 };

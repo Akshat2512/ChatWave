@@ -1,23 +1,17 @@
 import React, { createContext, useState, useContext } from 'react';
-import { ImageSourcePropType } from 'react-native';
 
 type UserContextType = {
-  UName: string;
-  setUName: (name: string) => void;
-  token: string;
-  setToken: (name: string) => void;
-  profilephoto: ImageSourcePropType;
-  setProfilephoto: (photo: ImageSourcePropType) => void;
+  token: string | null;
+  setToken: (token: string | null) => void;
 };
 
 const userContext = createContext<UserContextType | undefined>(undefined);
 
 export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children } : any) => {
-  const [token, setToken] = useState('');
-  const [UName, setUName] = useState('');
-  const [profilephoto, setProfilephoto] = useState(require('@/assets/profiles/images/default.png'))
+  const [token, setToken] = useState<string | null>(null);
+
   return (
-    <userContext.Provider value={{UName, setUName, token, setToken, profilephoto, setProfilephoto}}>
+    <userContext.Provider value={{token, setToken}}>
       {children}
     </userContext.Provider>
   ); 
