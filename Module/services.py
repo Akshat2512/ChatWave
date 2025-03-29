@@ -465,7 +465,6 @@ async def handle_messages(websocket: WebSocket, message, username, users_directo
                         if message["update"] == "profileImg":
        
                            base64_string = message["base64_string"]
-
                            current = datetime.datetime.now(datetime.timezone.utc)
                            current = current.strftime('%Y-%m-%d %H:%M:%S.%f')
 

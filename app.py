@@ -149,8 +149,7 @@ async def createUser(request: Request):
     pwd = response.get("pwd")
     b64_data = response.get("profile_img")
     created_on = datetime.datetime.now(datetime.timezone.utc)
-
-    print(user, pwd ,name, created_on)
+    created_on = created_on.strftime('%Y-%m-%d %H:%M:%S.%f')
 
     
     if len(user) < 5 or len(pwd) < 5:
