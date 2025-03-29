@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
   },
 
   textStyle:{
-    fontFamily:"GoogleSans", 
+    fontFamily:"SpaceMono", 
     fontSize: 16, 
     backgroundColor: "rgba(66, 65, 65, 0.37)",
     padding:10,
