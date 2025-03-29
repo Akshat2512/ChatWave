@@ -15,7 +15,7 @@ import { friendsProp, StateMngProp } from '@/store/userReducer';
 
 export type RootStackParamList = {  "Account": undefined; "UserChat": undefined } // Define the chat route
 
-export default function FriendList() {
+export default function FriendList({input}: { input: string }) {
   console.log("FriendList Rerendered");
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   
@@ -29,13 +29,20 @@ export default function FriendList() {
   const [result, setFriendList] = useState<friendsProp[]>([]);
 
 
-  useEffect(()=>{
-    if(friends){
-      setFriendList(friends);  
-    }
-  }, [friends]);
+  // useEffect(()=>{
+  //   if(friends){
+  //     setFriendList(friends);  
+  //   }
+  // }, [friends]);
 
     
+  useEffect(() => {
+      const regex = new RegExp(input, "i");
+      const filterLists = friends.filter(item => regex.test(item.uname) || regex.test(item.name ?? ''));
+      setFriendList(filterLists);
+  }, [input, friends])
+
+
   useEffect(()=>{
     if(recvMessage){
       if(recvMessage["friend_req"] == "sent"){
@@ -71,8 +78,7 @@ export default function FriendList() {
         if(updatedFriends)
            setFriendList(updatedFriends);
 
-        // friends = friends.filter(e => e.uname != uname)
-        console.log(friends.length);
+       
         sendMessage(`{"send":"del_friend_req", "from":"${uname}"}`);
       
     }
@@ -136,7 +142,7 @@ export default function FriendList() {
           </View>
 
         // </Link> 
-      )} /> : <Text style={themeTextStyle}>Friends Not Found</Text>}
+      )} /> : <Text style={[{alignSelf:"center"},themeTextStyle]}>Not found</Text>}
       <ImageZoomModal visible={isModalVisible} onClose={handleModalClose} imageSource={selectedImage || require('@/assets/profiles/images/default.png')} /></>
   );
 };

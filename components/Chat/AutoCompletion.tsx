@@ -1,13 +1,13 @@
 import { useTheme } from "@/context/ThemeContext";
 import { ContactsStateProp } from "@/store/contactReducer";
 import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, TextInput } from "react-native";
 import { useSelector } from "react-redux";
 import LoadingIndicator from "../LoadingIndicator";
 
 
 
-export default function AICompletion({select}:{select: (text: string)=>void}){
+export default function AICompletion({select, inputRef, textInput}:{select: (text: string)=>void, inputRef: React.RefObject<TextInput>, textInput: React.MutableRefObject<string>}) {
     // console.log("Ai chat renders");
     const {themeContainerStyle, themeTextStyle} = useTheme();
     const ai_completion = useSelector((state: ContactsStateProp)=> state.ContactUpdates.ai_completion);
@@ -22,7 +22,10 @@ export default function AICompletion({select}:{select: (text: string)=>void}){
                 select(ai_completion);
             }}
             onPress={() => {
-              
+              inputRef.current?.setNativeProps({ text: ai_completion });
+              if (ai_completion !== null) {
+                textInput.current = ai_completion;
+              }
             }}>
                 <Text style={[themeTextStyle, styles.textStyle]}>
                   {ai_completion}

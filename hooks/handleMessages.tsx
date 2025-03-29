@@ -44,7 +44,7 @@ export function HandleMessage(message: any, userName: string | null, online: str
   }
 
   if (message['Type'] == 'profileImg') {
-    console.log(message)
+    // console.log(message)
     if (message["uname"] == userName) {
       dispatch(setProfileImgAction(`${message["profile_pic"]}`, message["updated_on"]))
       if("created_on" in message){
@@ -68,7 +68,7 @@ export function HandleMessage(message: any, userName: string | null, online: str
       if (search) {
         search.profileImg = setProfileImgAction(message['profile_pic'], message.updated_on).payload.uri;
         dispatch(setSearchList(searchUser))
-        console.log("searchUser: ", searchUser)
+        // console.log("searchUser: ", searchUser)
       }
 
   

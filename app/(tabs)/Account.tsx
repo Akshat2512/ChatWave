@@ -8,7 +8,7 @@ import { useWebSocket } from '@/context/WebsocketContext';
 
 
 import LoadingIndicator from '@/components/ActivityIndicator';
-import { NavigationProp, StackActions, useIsFocused, useNavigation } from '@react-navigation/native';
+import { NavigationProp, StackActions,  useNavigation } from '@react-navigation/native';
 import { useUser } from '@/context/UserContext';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -34,17 +34,17 @@ export default function Account() {
   // const { userDetails, onlineUsers } = useSelector((state: ContactsStateProp) => state.ChatUpdates);
   // var { onlineUsers } = useSelector((state: ContactsStateProp) => state.ChatUpdates)
 
-  const isFocused = useIsFocused();
+  // const isFocused = useIsFocused();
 
-  useEffect(() => {
-    if (isFocused) {
-      console.log('Screen is focused');
-      // Your on focus code here
-    } else {
-      console.log('Screen is unfocused');
-      // Your on unfocus code here
-    }
-  }, [isFocused]);
+  // useEffect(() => {
+  //   if (isFocused) {
+  //     console.log('Screen is focused');
+  //     // Your on focus code here
+  //   } else {
+  //     console.log('Screen is unfocused');
+  //     // Your on unfocus code here
+  //   }
+  // }, [isFocused]);
 
 
 

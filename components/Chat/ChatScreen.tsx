@@ -589,7 +589,7 @@ const handleText = (text: string)=>{
                  <Text onPress={()=>{
                            handleText(textInput.current); 
                            textInput.current = "";
-                           inputRef.current?.clear();
+                           inputRef.current?.setNativeProps({ text: "" });
                  }} 
                  style={{
                   color: "white", 
@@ -616,12 +616,9 @@ const handleText = (text: string)=>{
         </View>}
       
          <View style={[styles.ai_container, {backgroundColor: colorMode == "dark" ? "black" : "white"}]}>
-        { botState == "awake" && <AutoCompletion select = {handleText} /> } 
+        { botState == "awake" && <AutoCompletion select = {handleText} inputRef={inputRef} textInput={textInput}/> } 
         </View>
      
-        
-       
-        {/* </KeyboardAvoidingView>     */}
 
         { textStyles && (<View><FlatList
           data={fontBgColor}

@@ -22,9 +22,7 @@ export default function FriendBase() {
         setName(input);
         
         // sendMessage(`{"get":"search_friend"}`);
-        loadingVisible(true);
-        
-        setFriendList([]);
+        // loadingVisible(true);
 
     }
     
@@ -75,7 +73,7 @@ export default function FriendBase() {
         {/* <KeyboardAvoidingView
            style={styles.inputContainer}
            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}> */}
-        { <View style={styles.friendList}><FriendList /></View>  }
+        { <View style={styles.friendList}><FriendList input = {name} /></View>  }
         {/* </KeyboardAvoidingView> */}
 
         </View>
