@@ -1,8 +1,8 @@
 import os
 import asyncio
 import threading
-# from dotenv import load_dotenv # Load environment variables from .env file 
-# load_dotenv()
+from dotenv import load_dotenv # Load environment variables from .env file 
+load_dotenv()
 
 
 # print(generate_response(prompt_1, API_KEY, AIRoles()))

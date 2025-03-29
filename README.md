@@ -74,7 +74,7 @@ CREATE TABLE user_updates (
 SET CLIENT_ENCODING TO 'UTF8';
 <!-- SET client_encoding = 'UTF8'; -->
 
-CREATE TABLE images (img_id SERIAL PRIMARY KEY, user_id INTEGER REFERENCES users(user_id) ON DELETE CASCADE, base64_string TEXT NOT NULL);
+CREATE TABLE images (img_id SERIAL PRIMARY KEY, user_id INTEGER REFERENCES users(user_id) ON DELETE CASCADE, base64_string TEXT NULL);
 
 
 ALTER SEQUENCE images_img_id_seq RESTART WITH 1001;

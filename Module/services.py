@@ -56,7 +56,7 @@ async def handle_messages(websocket: WebSocket, message, username, users_directo
 
                         if ( updated_on == None or updated_on == "null" or last_update > updated_on):
                           output = {"Type": "profileImg", "profile_pic": (await retrieve_database(query_profile_pic))[0][0], "uname": uname, "name": name, "last_seen": str(last_seen), "created_on": created_on, "updated_on":  str(last_update) }    
-                         
+                          print(output)
                         else:
                           output = { "Type": "profileDetails", "uname": uname, "name": name, "last_seen": str(last_seen), "created_on": created_on }    
                         await websocket.send_json(output)

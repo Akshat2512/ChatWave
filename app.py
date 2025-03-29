@@ -21,13 +21,13 @@ import datetime
 
 import jwt
 
-# import traceback
+import traceback
 import logging
 logger = logging.getLogger("uvicorn")
 logging.basicConfig(level=logging.INFO)
 
-# from dotenv import load_dotenv # Load environment variables from .env file 
-# load_dotenv()
+from dotenv import load_dotenv # Load environment variables from .env file 
+load_dotenv()
 
 app = FastAPI()
 
@@ -198,6 +198,7 @@ async def createUser(request: Request):
                     VALUES (%s, %s) RETURNING img_id
                 """
     params = (output, b64_data)
+    # print(params)
     await update_database(query, params, return_id = True)                        
     return {"account":"Account successfully created"}
     
