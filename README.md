@@ -2,6 +2,8 @@
 # AI ChatWave app Overview
 An AI-powered real-time chat application for Android users, designed to make communication social, engaging, and fun! Inspired by Instagram Stories, ChatWave offers features like AI-assisted messaging, stickers/GIFs sharing, and more.
 
+📦 [Download apk](https://github.com/Akshat2512/ChatWave/releases/download/v1.0-preview/AI-Chatwave-preview-version.apk)
+
 ## Features
 - **Account**: Users can easily create and login their personal accounts.
 <p align="center">
@@ -68,20 +70,6 @@ The image below demonstrates the database structure
 
 
 
-
-<!-- <p align="center">
-<img src="images/frontend2.png" alt="Image 2" style="height: 350px; width: 500px"><br>
-</p>
- <p align="center">
-<img src="images/frontend3.png" alt="Image 3" style="height: 350px; width: 500px"><br>
-</p>
-<p align="center">
-<img src="images/frontend4.png" alt="Image 4" style="height: 350px; width: 500px"><br>
-</p>
-<p align="center">
-<img src="images/frontend5.png" alt="Image 5" style="height: 350px; width: 500px"><br>
-</p> -->
-
 ## Key Responsibilities and Achievements
 
 ### Design and Development
@@ -105,7 +93,7 @@ The image below demonstrates the database structure
 If you have a repository for your project, clone it using git: 
 ```bash
      git clone https://github.com/Akshat2512/AI_Chatwave.git 
-     cd AI_Chatwave # move to the root folder of the application
+     cd Chatwave # move to the root folder of the application
 ```
 Next, create a separate virtual environment for python dependencies
 ```bash
