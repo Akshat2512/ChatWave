@@ -1,49 +1,114 @@
 
-+-------------+                                     +-------------+
-|   User A    |                                     |   User B    |
-|             |                                     |             |
-|  [Client]   |                                     |  [Client]   |
-+-----+-------+                                     +------+------+
-      |                                                  |
-      |                                                  |
-      |  Connect to WebSocket Server                     |  Connect to WebSocket Server
-      |  ws://example.com/ws/user_a                      |  ws://example.com/ws/user_b
-      +--------------------------+                       +---------------------------+
-                                 |                       |
-                                 |                       |
-                                 V                       V
-                    +------------+-----------------------+-------------+
-                    |                 WebSocket Server                   |
-                    |                 (Connection Manager)               |
-                    +----------------------------------------------------+
-                                 |                       |
-                                 |                       |
-        Broadcast message to all clients             Broadcast message to all clients
-        (including User B)                           (including User A)
-                                 |                       |
-                                 |                       |
-                                 V                       V
-                      +----------+------------+   +----------+------------+
-                      |   Message: "Hello"    |   |   Message: "Hi there" |
-                      |   from User A         |   |   from User B         |
-                      +-----------------------+   +-----------------------+
+# AI ChatWave app Overview
+An AI-powered real-time chat application for Android users, designed to make communication social, engaging, and fun! Inspired by Instagram Stories, ChatWave offers features like AI-assisted messaging, stickers/GIFs sharing, and more.
 
-const conversation = [
-  { "name": "Saint Joseph", "message": "Hey there! How are you doing today?" },
-  { "name": "You", "message": "I'm doing great, thanks! How about you?" },
-  { "name": "Saint Joseph", "message": "I'm good as well. Have you started working on that project?" },
-  { "name": "You", "message": "Yes, I just began this morning. There's a lot to do!" },
-  { "name": "Saint Joseph", "message": "I can imagine. Need any help with it?" },
-  { "name": "You", "message": "Thanks, I might take you up on that! I'll let you know if I get stuck." },
-  { "name": "Saint Joseph", "message": "No problem. Just give me a shout anytime." },
-  { "name": "You", "message": "Will do! What are you up to today?" },
-  { "name": "Saint Joseph", "message": "Just catching up on some reading. Have you read any good books lately?" },
-  { "name": "You", "message": "Not recently, but I'm looking for recommendations. Got any" },
-  { "name": "Saint Joseph", "message": "Absolutely. You should check out 'Sapiens' by Yuval Noah Harari. It's fascinating." },
-  { "name": "You", "message": "Sounds interesting! I'll add it to my list." }
-];
+## Features
+- **Account**: Users can easily create and login their personal accounts.
 
-CREATE TABLE users (
+<p align="center">
+<img src="Extras/account.jpg" alt="Not found" style="height: 600px; width: 300px" >&nbsp&nbsp&nbsp
+<img src="Extras/Login.gif" alt="Not found" style="height: 600px; width: 300px">
+<br>
+</p>
+
+- **Real time updates**: Implemented real time message and other updates like name, profile Image between users. If user changes their profile image or other details it get reflected in other online users.
+
+<p align="center">
+<img src="Extras/Realtimemessage.gif" alt="Not found" style="height: 600px; width: 700px" >
+<br>
+</p>
+- **Friend Management**: User send friend requests to users.
+- **Gif/Sticker Search**: User can share gifs or stickers using drag and drop.
+- **AI assists**: Used AI model for AI assisted conversation.
+- **Memory Retention Feature**: Implemented a chat memory management feature for each user, chat conversations are managed on both database server and client side, ensuring that chat conversation is maintained in memory as long as the user connected to the server.
+-**Change Themes**: User can switch between light and dark Mode.
+
+
+
+## Tech Stack 🛠️
+### Backend
+- **Python FastAPI**: Framework for handling multiple user requests efficiently and manage multiple websocket connections on server side.
+- **Websocket**: To handle Real Time messaging between users with robust server-client synchronization.
+
+### Frontend
+- **React Native or Expo Dev**: Frameworks for developing android, ios or web application
+- **EAS Cli**: Continuous Integration and Continuous Delivery for creating production-ready application.
+
+### Services
+- **AI Integration**: Integrated TogetherAI's meta-llama/Llama-3.3-70B-Instruct-Turbo-Free model for AI assisted chat recommendation, ensuring conversational relevance and coherence.
+- **Git/GitHub**: Utilized for version control, enabling efficient tracking of code changes, and supporting Continuous Integration/Deployment (CI/CD).
+- **Azure Web Service**: Hosted backend using Azure's Free SKU instance for CI/CD and public accessibility. Only allows 5 concurrent websocket connection at a time due to limited resource usage.
+- **PostgreSQL Service (via Vercel)**: For maintaining data integrity and securely stores user-related data, including credentials and messages.
+
+Below diagram shows how WebSocket server manages real-time, bidirectional communication between connected users, ensuring seamless message delivery via specific WebSocket URLs.
+
+<p align="center">
+<img src="Extras/websocket.drawio.png" alt="Not found" style="height: 450px; width: 700px"><br>
+</p>
+
+The image below demonstrates the database structure
+
+<p align="center">
+<img src="Extras/ERDiagram.drawio.png" alt="Not found" style="height: 850px; width: 700px"><br>
+</p>
+
+
+
+
+
+<!-- <p align="center">
+<img src="images/frontend2.png" alt="Image 2" style="height: 350px; width: 500px"><br>
+</p>
+ <p align="center">
+<img src="images/frontend3.png" alt="Image 3" style="height: 350px; width: 500px"><br>
+</p>
+<p align="center">
+<img src="images/frontend4.png" alt="Image 4" style="height: 350px; width: 500px"><br>
+</p>
+<p align="center">
+<img src="images/frontend5.png" alt="Image 5" style="height: 350px; width: 500px"><br>
+</p> -->
+
+## Key Responsibilities and Achievements
+
+### Design and Development
+- Designed both architecture of the application, ensuring real time messaging and AI integration.
+- Developed the front-end using frameworks like react native, expo dev, creating an intuitive and user-friendly interface.
+
+### Backend Management
+- Managed and optimized the backend processes to handle real-time user interactions efficiently.
+- Used FastAPI to handle realtime messaging.
+- Implemented chat memory management feature until instance is running. 
+- Ensured smooth communication between the UI and the AI models, reducing latency and improving performance.
+
+## Impact
+- Improved UI/UX design, making the application user-friendly.
+
+## Installation and Setup Instruction 🖥️
+- ### Clone the Repository 
+If you have a repository for your project, clone it using git: 
+```bash
+     git clone https://github.com/Akshat2512/AI_Chatwave.git 
+     cd AI_Chatwave # move to the root folder of the application
+```
+Next, create a separate virtual environment for python dependencies
+```bash
+     python -m venv my_env &&
+     my_env/Script/activate
+```
+Then install required libraries
+```bash
+     pip install -r requirements.txt
+```
+
+Then for starting application, first start the fastapi server i.e., app.py, run directly using this script in the terminal:
+```bash
+    uvicorn app:app --host localhost --port 5000 --reload
+```
+
+this, endpoint will accept all app requests Go to https://localhost:5000.
+
+<!-- CREATE TABLE users (
     user_id SERIAL PRIMARY KEY,
     username VARCHAR(50) UNIQUE NOT NULL,
     password VARCHAR NOT NULL,
@@ -65,16 +130,17 @@ CREATE TABLE user_updates (
 );
 
 
-<!-- CREATE TABLE messages (
+CREATE TABLE messages (
     msg_id SERIAL PRIMARY KEY,
-    uname_1 VARCHAR(50) NOT NULL,
-    uname_2 VARCHAR(50) NOT NULL,
+    uname_1 VARCHAR(50) NOT NULL REFERENCES users(username),
+    uname_2 VARCHAR(50) NOT NULL REFERENCES users(username),
     messages JSON  
-); -->
+);
+
 SET CLIENT_ENCODING TO 'UTF8';
 <!-- SET client_encoding = 'UTF8'; -->
 
-CREATE TABLE images (img_id SERIAL PRIMARY KEY, user_id INTEGER REFERENCES users(user_id) ON DELETE CASCADE, base64_string TEXT NULL);
+<!-- CREATE TABLE images (img_id SERIAL PRIMARY KEY, user_id INTEGER REFERENCES users(user_id) ON DELETE CASCADE, base64_string TEXT NULL);
 
 
 ALTER SEQUENCE images_img_id_seq RESTART WITH 1001;
@@ -84,67 +150,9 @@ ALTER SEQUENCE user_updates_user_update_id_seq RESTART WITH 101;
 
 
 
-SELECT pg_size_pretty(pg_total_relation_size('images')) AS total_size;
+SELECT pg_size_pretty(pg_total_relation_size('images')) AS total_size; --> 
 
 
 
-CREATE TABLE contacts (
-    contact_id SERIAL PRIMARY KEY,
-    user_id INTEGER NOT NULL,
-    contact_user_id INTEGER NOT NULL,
-    status VARCHAR(20) CHECK (status IN ('pending', 'accepted', 'blocked')) DEFAULT 'pending',
-    added_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(user_id),
-    FOREIGN KEY (contact_user_id) REFERENCES users(user_id),
-    UNIQUE (user_id, contact_user_id)
-);
-
-
--- Groups Table
-CREATE TABLE groups (
-    group_id SERIAL PRIMARY KEY,
-    group_name VARCHAR(100) NOT NULL,
-    creator_id INTEGER NOT NULL,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    description TEXT,
-    FOREIGN KEY (creator_id) REFERENCES users(user_id)
-);
-
--- Group Members Table
-CREATE TABLE group_members (
-    group_id INTEGER NOT NULL,
-    user_id INTEGER NOT NULL,
-    role VARCHAR(20) CHECK (role IN ('admin', 'member')) DEFAULT 'member',
-    joined_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (group_id, user_id),
-    FOREIGN KEY (group_id) REFERENCES groups(group_id),
-    FOREIGN KEY (user_id) REFERENCES users(user_id)
-);
-
--- Messages Table
-CREATE TABLE messages (
-    message_id SERIAL PRIMARY KEY,
-    sender_id INTEGER NOT NULL,
-    conversation_type VARCHAR(20) CHECK (conversation_type IN ('individual', 'group')) NOT NULL,
-    recipient_id INTEGER,
-    group_id INTEGER,
-    message_content TEXT NOT NULL,
-    sent_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    is_read BOOLEAN DEFAULT FALSE,
-    FOREIGN KEY (sender_id) REFERENCES users(user_id),
-    FOREIGN KEY (recipient_id) REFERENCES users(user_id),
-    FOREIGN KEY (group_id) REFERENCES groups(group_id),
-    CHECK (
-        (conversation_type = 'individual' AND recipient_id IS NOT NULL AND group_id IS NULL) OR
-        (conversation_type = 'group' AND group_id IS NOT NULL AND recipient_id IS NULL)
-    )
-);
-
--- Optional: Create indexes for performance
-CREATE INDEX idx_messages_sender ON messages(sender_id);
-CREATE INDEX idx_messages_recipient ON messages(recipient_id);
-CREATE INDEX idx_messages_group ON messages(group_id);
-CREATE INDEX idx_contacts_user ON contacts(user_id);
-CREATE INDEX idx_group_members_user ON group_members(user_id);
 
  <!-- uvicorn app:app --host 0.0.0.0 --port 5000 --reload -->

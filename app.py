@@ -49,20 +49,20 @@ app.add_middleware(
 
 SECRET_KEY = os.getenv("SECRET_KEY")
 
-def encrypt_password(password, salt):
-    # password = password
-    if(salt==None):
-     salt = os.urandom(1000)  
+# def encrypt_password(password, salt):
+#     # password = password
+#     if(salt==None):
+#      salt = os.urandom(1000)  
     
-    salted_password = salt+password.encode()
-    hashed_password = hashlib.sha256(salted_password).hexdigest()
-    salt = binascii.hexlify(salt).decode()
+#     salted_password = salt+password.encode()
+#     hashed_password = hashlib.sha256(salted_password).hexdigest()
+#     salt = binascii.hexlify(salt).decode()
 
-    return hashed_password, salt
+#     return hashed_password, salt
 
-def unhex(salt):
-    salt = binascii.unhexlify(salt)
-    return salt
+# def unhex(salt):
+#     salt = binascii.unhexlify(salt)
+#     return salt
 
    
 invalidated_tokens = set()
