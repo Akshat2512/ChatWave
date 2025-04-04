@@ -21,8 +21,6 @@ An AI-powered real-time chat application for Android users, designed to make com
 
 https://github.com/user-attachments/assets/9bddcaf1-4f36-4d40-bb82-c6a2a0fb82e7
 
-mAndY0y4
-
 - **AI assists**: Used AI model for AI assisted conversation.
 - **Friends/Connections**: User send friend requests to users.
 - **Memory Retention Feature**: Implemented a chat memory management chat conversations are managed on both server side using database and on client side using redux persists.
