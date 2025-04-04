@@ -4,23 +4,27 @@ An AI-powered real-time chat application for Android users, designed to make com
 
 ## Features
 - **Account**: Users can easily create and login their personal accounts.
-
 <p align="center">
 <img src="Extras/account.jpg" alt="Not found" style="height: 600px; width: 300px" >&nbsp&nbsp&nbsp
 <img src="Extras/Login.gif" alt="Not found" style="height: 600px; width: 300px">
 <br>
 </p>
 
-- **Real time updates**: Implemented real time message and other updates like name, profile Image between users. If user changes their profile image or other details it get reflected in other online users.
+- **Real time updates**: Real-time messaging and profile synchronization ensure instant reflections of changes (e.g., name or profile image) for connected users.
 
 <p align="center">
 <img src="Extras/Realtimemessage.gif" alt="Not found" style="height: 600px; width: 700px" >
 <br>
 </p>
-- **Friend Management**: User send friend requests to users.
-- **Gif/Sticker Search**: User can share gifs or stickers using drag and drop.
+
+- **Gif/Sticker Sharing**: User can share gifs or stickers using drag and drop.
+
+[Watch](https://youtu.be/MY9mAndY0y4)
+
 - **AI assists**: Used AI model for AI assisted conversation.
-- **Memory Retention Feature**: Implemented a chat memory management feature for each user, chat conversations are managed on both database server and client side, ensuring that chat conversation is maintained in memory as long as the user connected to the server.
+- **Friends/Connections**: User send friend requests to users.
+- **Memory Retention Feature**: Implemented a chat memory management chat conversations are managed on both server side using database and on client side using redux persists.
+
 -**Change Themes**: User can switch between light and dark Mode.
 
 
