@@ -13,10 +13,10 @@ An AI-powered real-time chat application for Android users, designed to make com
 
 - **Real time updates**: Allows Real-time messaging and profile synchronization. Any updates to user details, such as name or profile image, are instantly reflected for connected users. User can see their friends online in real time and the time they last active.
 
-<p align="center">
+<!-- <p align="center">
 <img src="Extras/Realtimemessage.gif" alt="Not found" style="height: 400px; width: 400px" >
 <br>
-</p>
+</p> -->
 
 - **Gif/Sticker Sharing**: Allows users to enhance their conversations by sharing GIFs or stickers effortlessly using a drag-and-drop interface. In gif search, user can add gifs in their Favourite section on long press on them or stickers. 
 
