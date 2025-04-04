@@ -59,7 +59,7 @@ export default function UserProfile() {
       isEditImage(false); // Close ChangeImage component after selecting image 
     };
     
-    const handleNameUpdate = () => {
+    const handleNameUpdate: () => void = () => {
       const payload = `{
         "update": "profileName",
         "name": "${name.current}"
@@ -99,7 +99,7 @@ export default function UserProfile() {
    }
   };
   
-        useEffect(() => {
+    useEffect(() => {
            
             const unsubscribe = navigation.addListener('beforeRemove', (e) => {
             if(click)

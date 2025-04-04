@@ -22,6 +22,7 @@ import { useWebSocket } from '@/context/WebsocketContext';
 import { ContactsStateProp } from '@/store/contactReducer';
 import AutoCompletion from './AutoCompletion';
 import { animated_bot } from '@/components/BotAnimation';
+import { useNavigation } from '@react-navigation/native';
 
 // interface ChatMessage {
 //   id: string;
@@ -90,8 +91,6 @@ const ChatView: React.FC<ChatHistoryProps> = ({ uname, visible}) => {
   const selected_gifs: ChatListProp[] | [] = [];
   
   var [selectedGif, setSelectedGif] = useState(selected_gifs);
-  
-  const [transformGif, setTransformgif] = useState(false);
   
   const [textStyles, setTextStyles] = useState(false);
 
@@ -172,7 +171,7 @@ const ChatView: React.FC<ChatHistoryProps> = ({ uname, visible}) => {
   useEffect(()=>{
     // console.log(msg_que)
     if(msg_que[uname]){
-        const que = msg_que[uname].reverse()
+      const que = msg_que[uname].reverse();
       sel_gifs.current.forEach((e,index)=>{
       if(e.id>=0){
         e.id = que[index];
@@ -210,6 +209,23 @@ const ChatView: React.FC<ChatHistoryProps> = ({ uname, visible}) => {
       };
       
     };
+   
+    const navigation = useNavigation();
+      
+    useEffect(() => {
+             
+              const unsubscribe = navigation.addListener('beforeRemove', (e) => {
+              if(isGifPickerVisible || textStyles){
+                setIsGifPickerVisible(false);
+                setTextStyles(false);
+                e.preventDefault();
+              } 
+           
+              });
+              
+              return unsubscribe;
+            }, [isGifPickerVisible, textStyles]);
+    
 
   function scrollToLastMessage(animated: boolean){
     if (ScrollViewRef.current) {
@@ -589,6 +605,7 @@ const handleText = (text: string)=>{
                  <Text onPress={()=>{
                            handleText(textInput.current); 
                            textInput.current = "";
+                           inputRef.current?.setNativeProps({ text: " " });
                            inputRef.current?.setNativeProps({ text: "" });
                  }} 
                  style={{
@@ -596,7 +613,9 @@ const handleText = (text: string)=>{
                   backgroundColor: "rgb(24, 110, 208)", 
                   paddingVertical: 8, 
                   paddingHorizontal:10, 
-                  borderRadius: 8}}>Select</Text>
+                  borderRadius: 8
+                  }}
+                  allowFontScaling={false}>Select</Text>
               </View> )
           : (<View style={[styles.inputIcons]}>
               {/* <Ionicons name="document-outline" size={30} color={colorMode === 'dark' ? "white" : "black"} /> */}
@@ -632,7 +651,7 @@ const handleText = (text: string)=>{
                              backgroundColor: item.backgroundColor, 
                              borderColor: fontStylesAndLayout[uname].fontBgColor === item.backgroundColor ? "rgb(24, 110, 208)" : "transparent"
                             } ]}
-               > Aa </Text>
+                            allowFontScaling={false} > Aa </Text>
             </TouchableOpacity>
               // console.log(item.backgroundColor)
           )}

@@ -38,7 +38,7 @@ export default function UserChat() {
   const { socket } = useWebSocket();
 
 
-  const chatSelect = useSelector((state: ContactsStateProp) => state.ContactUpdates.chatSelect);
+  const chatSelect =  useSelector((state: ContactsStateProp) => state.ContactUpdates.chatSelect);
   const onlineUsers = useSelector((state: ContactsStateProp) => state.ContactUpdates.onlineUsers);
   const updateState = useSelector((state: ContactsStateProp) => state.ContactUpdates.updateState);
   
@@ -65,8 +65,10 @@ export default function UserChat() {
         }
     
       }, [])
-
-
+  
+  
+     
+  
   const deviceWidth = Dimensions.get('window').width;
   const scalefactor = deviceWidth / viewWidth;
   

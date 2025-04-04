@@ -8,7 +8,7 @@ import { ChatListProp, fontProp } from '@/interfaces/ChatInterface';
 
 
 type Props = {
-  id: number;
+  id        : number;
   imageSize : number;
   uri       : string | null;
   font      : fontProp | null;
@@ -170,7 +170,7 @@ export default function DraggableImage({ id, imageSize, uri, font, setgif }: Pro
                   padding: 12,
                   width:200,
 
-                  // borderColor:"rgb(10, 235, 255)",
+                  // borderColor:"rgba(0, 0, 0, 0)",
                   // position: 'absolute',
                   justifyContent: 'center',
                   alignItems: 'center',

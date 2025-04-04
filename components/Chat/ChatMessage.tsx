@@ -60,8 +60,9 @@ const message = ({item}: {item: ChatListProp}) => {
                                {item.font && <View style={{
                                     // borderWidth: 3, 
                                     padding: 12,
-                                    // borderColor:"rgb(10, 235, 255)",
+                                    // borderColor:"rgba(0, 0, 0, 0)",
                                     // position: 'absolute',
+                                    // height: 200,
                                     width: 200,
                                     justifyContent: 'center',
                                     alignItems: 'center',
@@ -70,6 +71,8 @@ const message = ({item}: {item: ChatListProp}) => {
                                <Text style =
                                 {{color: item.font.bgColor == 'transparent'?  themeTextStyle.color : item.font.color,
                                   position: 'absolute',
+                                  // maxWidth: 200,
+                                  // flexWrap: 'wrap',
                                   // top: '50%',
                                   // left: '50%',
                                   // borderWidth: 3, 

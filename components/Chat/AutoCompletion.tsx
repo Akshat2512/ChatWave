@@ -22,6 +22,7 @@ export default function AICompletion({select, inputRef, textInput}:{select: (tex
                 select(ai_completion);
             }}
             onPress={() => {
+              inputRef.current?.setNativeProps({ text: "" });
               inputRef.current?.setNativeProps({ text: ai_completion });
               if (ai_completion !== null) {
                 textInput.current = ai_completion;
