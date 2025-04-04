@@ -19,10 +19,7 @@ An AI-powered real-time chat application for Android users, designed to make com
 
 - **Gif/Sticker Sharing**: User can share gifs or stickers using drag and drop.
 
-<p align="center">
-<video src="https://github.com/user-attachments/assets/9bddcaf1-4f36-4d40-bb82-c6a2a0fb82e7" alt="Not found" style="height: 500px; width: 800px" >
-<br>
-</p>
+https://github.com/user-attachments/assets/eb47f52e-5b1e-4e18-9171-5604f293fb0e
 
 
 - **AI assists**: Used AI model for AI assisted conversation.
