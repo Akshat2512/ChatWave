@@ -4,7 +4,6 @@ An AI-powered real-time chat application for Android users, designed to make com
 
 ## Features
 - **Account**: Users can easily create and login their personal accounts.
-
 <p align="center">
 <img src="Extras/account.jpg" alt="Not found" style="height: 400px; width: 200px" >&nbsp&nbsp&nbsp
 <img src="Extras/Login.gif" alt="Not found" style="height: 400px; width: 200px">
@@ -13,30 +12,26 @@ An AI-powered real-time chat application for Android users, designed to make com
 
 - **Real time updates**: Allows Real-time messaging and profile synchronization. Any updates to user details, such as name or profile image, are instantly reflected for connected users. User can see their friends online in real time and the time they last active.
 
-<!-- <p align="center">
+<p align="center">
 <img src="Extras/Realtimemessage.gif" alt="Not found" style="height: 400px; width: 400px" >
 <br>
-</p> -->
-- **Font Styling**: Enables users to change font styles.
-
-<p align="center">
-<img src="Extras/Fontstyles.gif" alt="Not found" style="height: 250px; width: 400px" >
 </p>
 
 - **Gif/Sticker Sharing**: Allows users to enhance their conversations by sharing GIFs or stickers effortlessly using a drag-and-drop interface. In gif search, user can add gifs in their Favourite section on long press on them or stickers. 
 
 https://github.com/user-attachments/assets/710047a8-c0a6-48e4-a92d-70afd47f623c
 
-<!-- - **AI Chat Recommendations**: Integrates an advanced AI model that assists with conversations by analyzing user communication styles and personas.
-
+- **AI Chat Recommendations**: Integrates an advanced AI model that assists with conversations by analyzing user communication styles and personas.
 <p align="center">
 <img src="Extras/Ai_assists.gif" alt="Not found" style="height: 580px; width: 340px" >
-</p> -->
+</p>
 
-
+- **Font Styling**: Enables users to change font styles.
+<p align="center">
+<img src="Extras/Fontstyles.gif" alt="Not found" style="height: 250px; width: 400px" >
+</p>
 
 - **Change Themes**: User can switch between light and dark theme.
-
 <p align="center">
 <img src="Extras/Theme.gif" alt="Not found" style="height: 400px; width: 250px" >
 </p>
