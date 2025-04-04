@@ -10,23 +10,34 @@ An AI-powered real-time chat application for Android users, designed to make com
 <br>
 </p>
 
-- **Real time updates**: Real-time messaging and profile synchronization ensure instant reflections of changes (e.g., name or profile image) for connected users.
+- **Real time updates**: Allows Real-time messaging and profile synchronization. Any updates to user details, such as name or profile image, are instantly reflected for connected users. User can see their friends online in real time and the time they last active.
 
 <p align="center">
 <img src="Extras/Realtimemessage.gif" alt="Not found" style="height: 400px; width: 400px" >
 <br>
 </p>
 
-- **Gif/Sticker Sharing**: User can share gifs or stickers using drag and drop.
+- **Gif/Sticker Sharing**: Allows users to enhance their conversations by sharing GIFs or stickers effortlessly using a drag-and-drop interface. In gif search, user can add gifs in their Favourite section on long press on them or stickers. 
 
 https://github.com/user-attachments/assets/710047a8-c0a6-48e4-a92d-70afd47f623c
 
-- **AI assists**: Used AI model for AI assisted conversation.
-- **Friends/Connections**: User send friend requests to users.
-- **Memory Retention Feature**: Implemented a chat memory management chat conversations are managed on both server side using database and on client side using redux persists.
+- **AI Chat Recommendations**: Integrates an advanced AI model that assists with conversations by analyzing user communication styles and personas.
+<p align="center">
+<img src="Extras/Ai_assists.gif" alt="Not found" style="height: 580px; width: 340px" >
+<br>
+</p>
 
--**Change Themes**: User can switch between light and dark Mode.
+- **Font Styling**: Enables users to change font styles.
+<p align="center">
+<img src="Extras/Fontstyles.gif" alt="Not found" style="height: 250px; width: 400px" >
+<br>
+</p>
 
+- **Change Themes**: User can switch between light and dark theme.
+<p align="center">
+<img src="Extras/Theme.gif" alt="Not found" style="height: 400px; width: 250px" >
+<br>
+</p>
 
 
 ## Tech Stack 🛠️
@@ -41,6 +52,7 @@ https://github.com/user-attachments/assets/710047a8-c0a6-48e4-a92d-70afd47f623c
 ### Services
 - **AI Integration**: Integrated TogetherAI's meta-llama/Llama-3.3-70B-Instruct-Turbo-Free model for AI assisted chat recommendation, ensuring conversational relevance and coherence.
 - **Git/GitHub**: Utilized for version control, enabling efficient tracking of code changes, and supporting Continuous Integration/Deployment (CI/CD).
+- **Giphy API service**: Utilized the Giphy API to retrieve public GIF URLs based on user input. This integration enhances user engagement by enabling users to search for specific GIFs, stickers, or emojis and share them seamlessly with their friends through API integration
 - **Azure Web Service**: Hosted backend using Azure's Free SKU instance for CI/CD and public accessibility. Only allows 5 concurrent websocket connection at a time due to limited resource usage.
 - **PostgreSQL Service (via Vercel)**: For maintaining data integrity and securely stores user-related data, including credentials and messages.
 
@@ -84,6 +96,9 @@ The image below demonstrates the database structure
 - Used FastAPI to handle realtime messaging.
 - Implemented chat memory management feature until instance is running. 
 - Ensured smooth communication between the UI and the AI models, reducing latency and improving performance.
+
+### Memory Retention
+ Implemented a chat memory management chat conversations are managed both on server side using psql database and on client side using redux persists.
 
 ## Impact
 - Improved UI/UX design, making the application user-friendly.
