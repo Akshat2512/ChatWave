@@ -5,15 +5,15 @@ An AI-powered real-time chat application for Android users, designed to make com
 ## Features
 - **Account**: Users can easily create and login their personal accounts.
 <p align="center">
-<img src="Extras/account.jpg" alt="Not found" style="height: 600px; width: 300px" >&nbsp&nbsp&nbsp
-<img src="Extras/Login.gif" alt="Not found" style="height: 600px; width: 300px">
+<img src="Extras/account.jpg" alt="Not found" style="height: 400px; width: 200px" >&nbsp&nbsp&nbsp
+<img src="Extras/Login.gif" alt="Not found" style="height: 400px; width: 200px">
 <br>
 </p>
 
 - **Real time updates**: Real-time messaging and profile synchronization ensure instant reflections of changes (e.g., name or profile image) for connected users.
 
 <p align="center">
-<img src="Extras/Realtimemessage.gif" alt="Not found" style="height: 600px; width: 700px" >
+<img src="Extras/Realtimemessage.gif" alt="Not found" style="height: 400px; width: 400px" >
 <br>
 </p>
 
