@@ -17,6 +17,11 @@ An AI-powered real-time chat application for Android users, designed to make com
 <img src="Extras/Realtimemessage.gif" alt="Not found" style="height: 400px; width: 400px" >
 <br>
 </p> -->
+- **Font Styling**: Enables users to change font styles.
+
+<p align="center">
+<img src="Extras/Fontstyles.gif" alt="Not found" style="height: 250px; width: 400px" >
+</p>
 
 - **Gif/Sticker Sharing**: Allows users to enhance their conversations by sharing GIFs or stickers effortlessly using a drag-and-drop interface. In gif search, user can add gifs in their Favourite section on long press on them or stickers. 
 
@@ -28,11 +33,7 @@ https://github.com/user-attachments/assets/710047a8-c0a6-48e4-a92d-70afd47f623c
 <img src="Extras/Ai_assists.gif" alt="Not found" style="height: 580px; width: 340px" >
 </p> -->
 
-- **Font Styling**: Enables users to change font styles.
 
-<p align="center">
-<img src="Extras/Fontstyles.gif" alt="Not found" style="height: 250px; width: 400px" >
-</p>
 
 - **Change Themes**: User can switch between light and dark theme.
 
