@@ -2,7 +2,7 @@
 # AI-Based Chat App Overview
 An AI-powered real-time chat application for Android users, designed to make communication social, engaging, and fun! Inspired by Instagram Stories, ChatWave offers features like AI-assisted messaging, stickers/GIFs sharing, and more.
 
-📦 [Download apk file](https://github.com/Akshat2512/ChatWave/releases/download/v1.0-preview/AI-Chatwave-preview-version.apk)
+📦 [Download APK file](https://github.com/Akshat2512/ChatWave/releases/download/v1.0-preview/AI-Chatwave-preview-version.apk)
 
 **Note**: This app is not Google Play verified, so users may encounter a warning when installing it. Please proceed only if you trust this source.
 
