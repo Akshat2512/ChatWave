@@ -1,8 +1,8 @@
 
-# AI ChatWave app Overview
+# AI-Based Chat App Overview
 An AI-powered real-time chat application for Android users, designed to make communication social, engaging, and fun! Inspired by Instagram Stories, ChatWave offers features like AI-assisted messaging, stickers/GIFs sharing, and more.
 
-📦 [Download apk](https://github.com/Akshat2512/ChatWave/releases/download/v1.0-preview/AI-Chatwave-preview-version.apk)
+📦 [Download apk file](https://github.com/Akshat2512/ChatWave/releases/download/v1.0-preview/AI-Chatwave-preview-version.apk)
 
 ## Features
 - **Account**: Users can easily create and login their personal accounts.
@@ -12,7 +12,7 @@ An AI-powered real-time chat application for Android users, designed to make com
 <br>
 </p>
 
-- **Real time updates**: Allows Real-time messaging and profile synchronization. Any updates to user details, such as name or profile image, are instantly reflected for connected users. User can see their friends online in real time and the time they last active.
+- **Real time updates**: Allows Real-time messaging and profile synchronization. Any updates to user details, such as name or profile image, are instantly reflected for connected users. User can see their friend's status in real time (whether they are currently online or when they were last active).
 
 <p align="center">
 <img src="Extras/Realtimemessage.gif" alt="Not found" style="height: 400px; width: 400px" >
@@ -33,7 +33,7 @@ https://github.com/user-attachments/assets/710047a8-c0a6-48e4-a92d-70afd47f623c
 <img src="Extras/Fontstyles.gif" alt="Not found" style="height: 250px; width: 400px" >
 </p>
 
-- **Change Themes**: User can switch between light and dark theme.
+- **Switch Theme**: User can switch between light and dark theme.
 <p align="center">
 <img src="Extras/Theme.gif" alt="Not found" style="height: 400px; width: 250px" >
 </p>
@@ -74,25 +74,25 @@ The image below demonstrates the database structure
 
 ### Design and Development
 - Designed both architecture of the application, ensuring real time messaging and AI integration.
-- Developed the front-end using frameworks like react native, expo dev, creating an intuitive and user-friendly interface.
-
-### Backend Management
+- Developed the front-end using frameworks like react native, expo dev, creating an intuitive and user-friendly interface
+- Used FastAPI Framework and websocket to handle realtime messaging.
 - Managed and optimized the backend processes to handle real-time user interactions efficiently.
-- Used FastAPI to handle realtime messaging.
-- Implemented chat memory management feature until instance is running. 
+- Implemented chat memory management feature for AI to read users conversations style or identify persona using their past conversations. 
 - Ensured smooth communication between the UI and the AI models, reducing latency and improving performance.
 
 ### Memory Retention
- Implemented a chat memory management chat conversations are managed both on server side using psql database and on client side using redux persists.
+ Chat conversations are managed both on server side using psql database and on client side using redux persists.
 
 ## Impact
 - Improved UI/UX design, making the application user-friendly.
+
+
 
 ## Installation and Setup Instruction 🖥️
 - ### Clone the Repository 
 If you have a repository for your project, clone it using git: 
 ```bash
-     git clone https://github.com/Akshat2512/AI_Chatwave.git 
+     git clone https://github.com/Akshat2512/Chatwave.git 
      cd Chatwave # move to the root folder of the application
 ```
 Next, create a separate virtual environment for python dependencies
