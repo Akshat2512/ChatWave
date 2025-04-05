@@ -4,6 +4,8 @@ An AI-powered real-time chat application for Android users, designed to make com
 
 📦 [Download apk file](https://github.com/Akshat2512/ChatWave/releases/download/v1.0-preview/AI-Chatwave-preview-version.apk)
 
+**Note**: This app is not Google Play verified, so users may encounter a warning when installing it. Please proceed only if you trust this source.
+
 ## Features
 - **Account**: Users can easily create and login their personal accounts.
 <p align="center">
