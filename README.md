@@ -21,7 +21,7 @@ An AI-powered real-time chat application for Android users, designed to make com
 <br>
 </p>
 
-- **Gif/Sticker Sharing**: Allows users to enhance their conversations by sharing GIFs or stickers effortlessly using a drag-and-drop interface. In gif search, user can add gifs in their Favourite section on long press on them or stickers. 
+- **Gif/Sticker Sharing**: Allows users to enhance their conversations by sharing GIFs or stickers effortlessly using a drag-and-drop interface. In gif search, on long pressing the gif or stickers user can add them in their Favourite section. 
 
 https://github.com/user-attachments/assets/710047a8-c0a6-48e4-a92d-70afd47f623c
 
