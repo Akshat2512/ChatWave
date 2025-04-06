@@ -7,7 +7,7 @@ import datetime
 import asyncio
 
 
-from App_dev.chatwave_Backend.Module.ai_models import generate_response
+from Module.ai_models import generate_response
 
 friends_locks = {}
 

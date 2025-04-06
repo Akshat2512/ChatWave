@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from Module.connect_database import retrieve_database, update_database
 from Module.services import handle_messages
-from App_dev.chatwave_Backend.Module.ai_models import AIChatEngine
+from Module.ai_models import AIChatEngine
 
 import hashlib
 import binascii
