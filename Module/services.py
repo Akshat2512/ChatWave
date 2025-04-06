@@ -7,7 +7,7 @@ import datetime
 import asyncio
 
 
-from Module.openai_models import generate_response
+from App_dev.chatwave_Backend.Module.ai_models import generate_response
 
 friends_locks = {}
 

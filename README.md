@@ -25,7 +25,7 @@ An AI-powered real-time chat application for Android users, designed to make com
 
 https://github.com/user-attachments/assets/710047a8-c0a6-48e4-a92d-70afd47f623c
 
-- **AI Chat Recommendations**: Integrates an advanced AI model that assists with conversations by analyzing user communication styles and personas.
+- **AI Chat Recommendations**: Integrates an advanced AI model (meta-llama/Llama-3.3-70B-Instruct-Turbo-Free by TogetherAI) that assists with conversations by analyzing user communication styles and personas.
 <p align="center">
 <img src="Extras/Ai_assists.gif" alt="Not found" style="height: 580px; width: 340px" >
 </p>
